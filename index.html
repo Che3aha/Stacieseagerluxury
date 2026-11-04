@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'none'; object-src 'none'; form-action https://formsubmit.co; script-src 'self' 'sha256-YUdtRBEwLkYKtj8ExjOYZDci8w2rh3bLk1R8ZxhN27o=' 'sha256-wYn53S6SPmQIVBWvNRcMWc3hpv+//P70H1bAMg5dza4=' 'sha256-NWVSPdKu5uyhIaCSVsVRfff3i45GRzJAmlFjE9z+6nU='; script-src-attr 'none'; style-src 'self' https://fonts.googleapis.com 'sha256-ygxWe2I7SfHJT7pwsyS321LLLxmi54SMD/He5RvpKCs='; style-src-attr 'none'; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self' https://formsubmit.co; frame-src 'none'; worker-src 'none'; manifest-src 'self'; upgrade-insecure-requests">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'none'; object-src 'none'; form-action https://formsubmit.co; script-src 'self' 'sha256-YUdtRBEwLkYKtj8ExjOYZDci8w2rh3bLk1R8ZxhN27o=' 'sha256-wYn53S6SPmQIVBWvNRcMWc3hpv+//P70H1bAMg5dza4=' 'sha256-nJnXQDG2+DFX6rB2kUhvU+8btet0miSYTblIDgnl5qc='; script-src-attr 'none'; style-src 'self' https://fonts.googleapis.com 'sha256-ygxWe2I7SfHJT7pwsyS321LLLxmi54SMD/He5RvpKCs='; style-src-attr 'none'; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self' https://formsubmit.co; frame-src 'none'; worker-src 'none'; manifest-src 'self'; upgrade-insecure-requests">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Stacie Seager - Luxury Extensions + Signature Blonding + Color</title>
 <meta name="description" content="Stacie Seager is a Scottsdale luxury hair extensions and blonding specialist offering bespoke color, seamless extensions, and precision haircuts. Book a private consultation.">
@@ -1699,7 +1699,7 @@
         <div class="reservation-box individual-reservation" hidden>
           <h4>Reserve for Salon Pickup</h4>
           <p>Submit your request and Stacie will confirm availability and pickup details by email or phone.</p>
-          <form class="reservation-form product-reservation-form" action="https://formsubmit.co/Stacie.seager@mac.com" method="POST" accept-charset="UTF-8">
+          <form class="reservation-form product-reservation-form" action="https://formsubmit.co/stacie.seager@mac.com" method="POST" accept-charset="UTF-8">
             <input type="hidden" name="_subject" value="New salon pickup order — Kérastase Chroma Absolu">
             <input type="hidden" name="_template" value="table">
             <input type="hidden" name="_next" value="https://stacie-seager-hair.paxton-tait-1151.chatgpt.site/?order=success">
@@ -1746,7 +1746,7 @@
           <div class="reservation-box individual-reservation" hidden>
             <h4>Reserve for Salon Pickup</h4>
             <p>Submit your request and Stacie will confirm availability and pickup details by email or phone.</p>
-            <form class="reservation-form product-reservation-form" action="https://formsubmit.co/Stacie.seager@mac.com" method="POST" accept-charset="UTF-8">
+            <form class="reservation-form product-reservation-form" action="https://formsubmit.co/stacie.seager@mac.com" method="POST" accept-charset="UTF-8">
               <input type="hidden" name="_subject" value="New salon pickup order — Color Wow Insta-Wow">
               <input type="hidden" name="_template" value="table">
               <input type="hidden" name="_next" value="https://stacie-seager-hair.paxton-tait-1151.chatgpt.site/?order=success">
@@ -1776,7 +1776,7 @@
       <p class="eyebrow">SALON PICKUP</p>
       <h4 id="orderModalTitle">Complete Your Pickup Order</h4>
       <p>Your chosen products are listed below. Add your details and Stacie will confirm availability, the November discount, and pickup.</p>
-      <form class="reservation-form product-reservation-form" id="mixReservationForm" action="https://formsubmit.co/Stacie.seager@mac.com" method="POST" accept-charset="UTF-8">
+      <form class="reservation-form product-reservation-form" id="mixReservationForm" action="https://formsubmit.co/stacie.seager@mac.com" method="POST" accept-charset="UTF-8">
         <input type="hidden" name="_subject" value="New luxury collection salon pickup request">
         <input type="hidden" name="_template" value="table">
         <input type="hidden" name="_next" value="https://stacie-seager-hair.paxton-tait-1151.chatgpt.site/?order=success">
@@ -1886,7 +1886,7 @@
     <p class="eyebrow">STAY IN THE LOOP</p>
     <h2>Join the VIP List</h2>
     <p class="desc">Be the first to know about exclusive promos, last-minute openings, and seasonal color inspiration.</p>
-    <form class="vip-form" id="vipForm" action="https://formsubmit.co/Stacie.seager@mac.com" method="POST" accept-charset="UTF-8">
+    <form class="vip-form" id="vipForm" action="https://formsubmit.co/stacie.seager@mac.com" method="POST" accept-charset="UTF-8">
       <input type="hidden" name="_subject" value="New Stacie Seager VIP subscriber">
       <input type="hidden" name="_template" value="table">
       <input type="hidden" name="_next" value="https://stacie-seager-hair.paxton-tait-1151.chatgpt.site/?vip=success#vip">
@@ -2426,66 +2426,8 @@
     }
     window.setTimeout(() => { shareStatus.textContent = ''; }, 6000);
   });
-  const formSubmitAjaxEndpoint = 'https://formsubmit.co/ajax/Stacie.seager@mac.com';
-  function formPayload(form){
-    const payload = {};
-    new FormData(form).forEach((value,key) => {
-      if(key === '_honey' || value === '') return;
-      payload[key] = value;
-    });
-    return payload;
-  }
-  function openEmailFallback(form, statusElement){
-    const payload = formPayload(form);
-    const subject = payload._subject || 'New request from the Stacie Seager website';
-    const body = Object.entries(payload)
-      .filter(([key]) => !key.startsWith('_'))
-      .map(([key,value]) => `${key.replaceAll('_',' ')}: ${value}`)
-      .join('\n');
-    if(statusElement) statusElement.textContent = 'The secure form service is temporarily unavailable. Your email app is opening—please press Send to deliver this request directly to Stacie.';
-    window.location.href = `mailto:stacie.seager@mac.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-  }
-  async function submitSiteForm(form, statusElement, kind){
-    const submitButton = form.querySelector('button[type="submit"]');
-    const originalLabel = submitButton.textContent;
-    submitButton.disabled = true;
-    submitButton.textContent = 'SENDING…';
-    if(statusElement) statusElement.textContent = 'Sending securely…';
-    const controller = new AbortController();
-    const timeout = window.setTimeout(() => controller.abort(),7000);
-    try {
-      const response = await fetch(formSubmitAjaxEndpoint,{
-        method:'POST',
-        headers:{'Content-Type':'application/json','Accept':'application/json'},
-        body:JSON.stringify(formPayload(form)),
-        signal:controller.signal
-      });
-      if(!response.ok) throw new Error(`Form service returned ${response.status}`);
-      const result = await response.json();
-      if(result.success === false) throw new Error('Form service rejected the request');
-      form.reset();
-      if(statusElement) statusElement.textContent = kind === 'order'
-        ? 'Your pickup request was sent directly to Stacie.'
-        : 'You are on Stacie’s VIP list.';
-      document.querySelector('#thankYouModal .script').textContent = 'Thank you!';
-      document.getElementById('thankYouTitle').textContent = kind === 'order' ? 'Pickup order received' : "You're on the list";
-      document.querySelector('#thankYouModal p:not(.script)').textContent = kind === 'order'
-        ? 'Your request was sent directly to Stacie. She will contact you to confirm availability and pickup details.'
-        : "We'll send new promos and seasonal offers your way as soon as they're ready.";
-      document.getElementById('modalOk').textContent = kind === 'order' ? 'PERFECT' : 'SOUNDS GOOD';
-      openModal();
-    } catch(error){
-      openEmailFallback(form,statusElement);
-    } finally {
-      window.clearTimeout(timeout);
-      submitButton.disabled = false;
-      submitButton.textContent = originalLabel;
-    }
-  }
-  document.getElementById('vipForm').addEventListener('submit',event => {
-    event.preventDefault();
+  document.getElementById('vipForm').addEventListener('submit',() => {
     trackSiteEvent('vip_signup_submit');
-    submitSiteForm(event.currentTarget,document.getElementById('vipNote'),'vip');
   });
 
   document.querySelectorAll('.testimonial-toggle').forEach(button => {
@@ -2586,12 +2528,9 @@
   document.addEventListener('keydown',event => { if(event.key === 'Escape' && orderModal.classList.contains('open')) closeOrderModal(); });
   updateOrderTray();
 
-  document.querySelectorAll('.product-reservation-form').forEach(productReservationForm => productReservationForm.addEventListener('submit', event => {
-    event.preventDefault();
+  document.querySelectorAll('.product-reservation-form').forEach(productReservationForm => productReservationForm.addEventListener('submit', () => {
     if(productReservationForm.id === 'mixReservationForm') updateMixOrderSummary();
-    const reservationNote = productReservationForm.querySelector('.reservation-note');
     trackSiteEvent('product_order_submit');
-    submitSiteForm(productReservationForm,reservationNote,'order');
   }));
 
   const modal = document.getElementById('thankYouModal');
