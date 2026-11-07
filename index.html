@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'none'; object-src 'none'; form-action https://api.web3forms.com; script-src 'self' 'sha256-YUdtRBEwLkYKtj8ExjOYZDci8w2rh3bLk1R8ZxhN27o=' 'sha256-wYn53S6SPmQIVBWvNRcMWc3hpv+//P70H1bAMg5dza4=' 'sha256-9yaRipMbGZBIXxCA9nDEUjcghhG5k7OWDiq6+RmU5sE='; script-src-attr 'none'; style-src 'self' https://fonts.googleapis.com 'sha256-ygxWe2I7SfHJT7pwsyS321LLLxmi54SMD/He5RvpKCs='; style-src-attr 'none'; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self' https://api.web3forms.com; frame-src 'none'; worker-src 'none'; manifest-src 'self'; upgrade-insecure-requests">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'none'; object-src 'none'; form-action https://api.web3forms.com; script-src 'self' 'sha256-YUdtRBEwLkYKtj8ExjOYZDci8w2rh3bLk1R8ZxhN27o=' 'sha256-wYn53S6SPmQIVBWvNRcMWc3hpv+//P70H1bAMg5dza4=' 'sha256-JNxz9DbiYLUaeGtGbbPchH2ZRR7KReu19+LOQgyJJCM='; script-src-attr 'none'; style-src 'self' https://fonts.googleapis.com 'sha256-ygxWe2I7SfHJT7pwsyS321LLLxmi54SMD/He5RvpKCs='; style-src-attr 'none'; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self' https://api.web3forms.com; frame-src 'none'; worker-src 'none'; manifest-src 'self'; upgrade-insecure-requests">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Stacie Seager - Luxury Extensions + Signature Blonding + Color</title>
 <meta name="description" content="Stacie Seager is a Scottsdale luxury hair extensions and blonding specialist offering bespoke color, seamless extensions, and precision haircuts. Book a private consultation.">
@@ -2440,8 +2440,39 @@
     }
     window.setTimeout(() => { shareStatus.textContent = ''; }, 6000);
   });
-  document.getElementById('vipForm').addEventListener('submit',() => {
+  document.getElementById('vipForm').addEventListener('submit', async event => {
+    event.preventDefault();
+    const form = event.currentTarget;
+    const submitButton = form.querySelector('button[type="submit"]');
+    const status = document.getElementById('vipNote');
+    const originalLabel = submitButton.textContent;
+    submitButton.disabled = true;
+    submitButton.textContent = 'SUBSCRIBING…';
+    status.textContent = 'Adding you to Stacie’s VIP list…';
     trackSiteEvent('vip_signup_submit');
+    const formData = new FormData(form);
+    formData.delete('redirect');
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method:'POST',
+        headers:{'Accept':'application/json'},
+        body:formData
+      });
+      const result = await response.json();
+      if(!response.ok || result.success === false) throw new Error(result.message || 'Subscription could not be completed.');
+      form.reset();
+      status.textContent = '';
+      document.querySelector('#thankYouModal .script').textContent = 'Thank you!';
+      document.getElementById('thankYouTitle').textContent = 'Welcome to the VIP list';
+      document.querySelector('#thankYouModal p:not(.script)').textContent = 'Your subscription was received. You’ll be the first to hear about exclusive promotions, openings, and seasonal inspiration.';
+      document.getElementById('modalOk').textContent = 'PERFECT';
+      openModal();
+    } catch(error) {
+      status.textContent = error.message || 'Something went wrong. Please try again.';
+    } finally {
+      submitButton.disabled = false;
+      submitButton.textContent = originalLabel;
+    }
   });
 
   document.querySelectorAll('.testimonial-toggle').forEach(button => {
@@ -2542,9 +2573,45 @@
   document.addEventListener('keydown',event => { if(event.key === 'Escape' && orderModal.classList.contains('open')) closeOrderModal(); });
   updateOrderTray();
 
-  document.querySelectorAll('.product-reservation-form').forEach(productReservationForm => productReservationForm.addEventListener('submit', () => {
+  document.querySelectorAll('.product-reservation-form').forEach(productReservationForm => productReservationForm.addEventListener('submit', async event => {
+    event.preventDefault();
     if(productReservationForm.id === 'mixReservationForm') updateMixOrderSummary();
+    const submitButton = productReservationForm.querySelector('button[type="submit"]');
+    const status = productReservationForm.querySelector('.reservation-note');
+    const originalLabel = submitButton.textContent;
+    const originalStatus = status.textContent;
+    submitButton.disabled = true;
+    submitButton.textContent = 'SENDING…';
+    status.textContent = 'Sending your pickup request directly to Stacie…';
     trackSiteEvent('product_order_submit');
+    const formData = new FormData(productReservationForm);
+    formData.delete('redirect');
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method:'POST',
+        headers:{'Accept':'application/json'},
+        body:formData
+      });
+      const result = await response.json();
+      if(!response.ok || result.success === false) throw new Error(result.message || 'Your pickup request could not be sent.');
+      productReservationForm.reset();
+      status.textContent = originalStatus;
+      if(productReservationForm.id === 'mixReservationForm') {
+        document.querySelectorAll('.collection-product input:checked').forEach(input => { input.checked = false; });
+        updateOrderTray();
+        closeOrderModal();
+      }
+      document.querySelector('#thankYouModal .script').textContent = 'Thank you!';
+      document.getElementById('thankYouTitle').textContent = 'Pickup order received';
+      document.querySelector('#thankYouModal p:not(.script)').textContent = 'Your request was sent directly to Stacie. She will contact you to confirm availability and pickup details.';
+      document.getElementById('modalOk').textContent = 'PERFECT';
+      openModal();
+    } catch(error) {
+      status.textContent = error.message || 'Something went wrong. Please try again.';
+    } finally {
+      submitButton.disabled = false;
+      submitButton.textContent = originalLabel;
+    }
   }));
 
   const modal = document.getElementById('thankYouModal');
